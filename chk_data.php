@@ -25,11 +25,11 @@ if(isset($_POST['input_name'])) {
     $result = db_all($conn, $sql);
 
     if(count($result) > 0) {
-        $arr_data = array("code"=>"200","msg"=> "Has been data!");
+        $arr_data = array("code"=>"400","msg"=> "Has been data!");
         echo json_encode($arr_data);
         exit;
     } else {
-        $arr_data = array("code"=>"400","msg"=> "No has been data!");
+        $arr_data = array("code"=>"200","msg"=> "No has been data!");
         echo json_encode($arr_data);
         exit;
     }

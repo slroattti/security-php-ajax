@@ -1,5 +1,4 @@
-<?php require_once 'config.php'; 
-?>
+<?php require_once 'config.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +17,7 @@
     <div class="card w-50 h-50 my-5 p-4 mx-auto">
         <div class="container">
             <div class="row">
-                <h1 class="mt-5 mb-2 text-warning">Security</h1>
+                <h1 class="mt-5 px-4 mb-3 text-info">Register</h1>
                 <?php if (isset($_SESSION['error'])) { ?>
                     <div class="alert alert-danger" role="alert">
                         <?php
@@ -93,13 +92,13 @@
                         <span class="text-danger" id="msg10">&nbsp;</span>
                     </div>
                     <div class="form-group">
-                        <input class="w-50" id="captcha_code" name="captcha_code" type="text">
-                        <img src="https://a00a-180-183-250-244.ap.ngrok.io/security/phptextcaptcha/phptextcaptcha/captcha.php?rand=<?php echo rand(); ?>" id='captchaimg'>
+                        <input class="w-50 border-1 border-gray-100 rounded outline-0" id="captcha_code" name="captcha_code" type="text">
+                        <img src="https://bb03-180-183-250-244.ap.ngrok.io/security/phptextcaptcha/phptextcaptcha/captcha.php?rand=<?php echo rand(); ?>" id='captchaimg'>
                         <a class="btn btn-warning" href="javascript: refreshCaptcha();"><i class="bi bi-arrow-clockwise"></i></a>
                         <span class="text-danger" id="msg11">&nbsp;</span>
                     </div>
 
-                    <input class="mt-3 btn btn-success form-control" type="submit" name="send" id="send" value="Send">
+                    <input class="mt-3 btn btn-info form-control" type="submit" name="send" id="send" value="Send">
                 </form>
             </div>
         </div>
@@ -118,8 +117,6 @@
             var idCard = $('#idCard').val();
             var address = $('#address').val();
             var captcha_code = $('#captcha_code').val();
-
-          
 
             $('*[id*=msg]').html('&nbsp;');
             // check values empty
@@ -230,31 +227,31 @@
             }
 
             // check input exists username|phone|email|id_card
-            var chk_phone = chk_data('phone', phone);
-            if(chk_phone != "200") {
+            var chk_phone = JSON.parse(chk_data('phone', phone));
+            if(chk_phone.code != "200") {
                 $("#phone").focus();
                 $("#msg4").html('* Username is exists!');
                 return false;
             }
-            var chk_email = chk_data('email', email);
-            if(chk_email != "200") {
+            var chk_email = JSON.parse(chk_data('email', email));
+            if(chk_email.code != "200") {
                 $("#email").focus();
                 $("#msg5").html('* Username is exists!');
                 return false;
             }
-            var chk_name = chk_data('username', user);
-            if(chk_name != "200") {
+            var chk_name = JSON.parse(chk_data('username', user));
+            if(chk_name.code != "200") {
                 $("#user").focus();
                 $("#msg6").html('* Username is exists!');
                 return false;
             }
-            var chk_id_card = chk_data('id_card', id_card);
-            if(chk_id_card != "200") {
+            var chk_id_card = JSON.parse(chk_data('id_card', idCard));
+            if(chk_id_card.code != "200") {
                 $("#id_card").focus();
                 $("#msg9").html('* Username is exists!');
                 return false;
             }
-            $('form1').submit();
+            $('#form1').submit();
         })
 
 
@@ -312,20 +309,15 @@
         }
 
         function chk_data(input_name, input_value) {
-            $.ajax({
+            var result;
+            result = $.ajax({
                 type: "POST",
                 url: "chk_data.php",
-                cache: false,
                 data: "input_name="+input_name+"&input_value="+input_value,
-                success: function(msg){
-                    var res = JSON.parse(msg);
-                    return res.code;
-                },
-                error: function(msg) {
-                    var res = JSON.parse(msg);
-                    return res;
-                }
+                cache: false,
+                async: false,
             });
+            return result.responseText;
         }
     </script>
 </body>

@@ -4,7 +4,7 @@
    session_start();
 
    define("BASE_URL", "http://localhost/security/");
-   define("BASE_URL_LINK", "https://a00a-180-183-250-244.ap.ngrok.io/");
+   define("BASE_URL_LINK", "https://bb03-180-183-250-244.ap.ngrok.io/");
    $key = "oattiz!";
    $appId = "2001";
    $passportId = "welcome'tomayworld";

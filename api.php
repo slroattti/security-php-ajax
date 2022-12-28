@@ -60,7 +60,7 @@ if (count($_POST) > 0) {
             ];
             json_response($response);
         } else {
-            $passwordHash = md5($username.$appId.$passportId);
+            $passwordHash = md5($password.$appId.$passportId);
             $sql = "INSERT INTO security (firstname, lastname, nickname, phone, email, username, password, id_card, address)
                     VALUES ('$firstname', '$lastname', '$nickname', '$phone', '$email', '$username', '$passwordHash', '$id_card', '$address')";
             $result = $conn->exec($sql);

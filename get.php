@@ -1,19 +1,21 @@
 <?php
 require_once 'config.php';
 
-$sql = "SELECT firstname, lastname, nickname, phone, email, address FROM security";
-$result = $conn->exec($sql);
+$sql = "SELECT * FROM security ORDER BY id DESC LIMIT 5";
+$result = db_all($conn, $sql);
 if(count($result) > 0) {
-    $res = {
+    $response = [
         'code' => 200,
         'message' => "success",
-        'result' => result[0],
-    }
-    json_response($res);
+        'result' => $result,
+    ];
+    json_response($response);
 } else {
-    $res = {
+    $response = [
         'code' => 400,
         'message' => 'failed',
-    }
+    ];
+    json_response($response);
 }
+
 ?>
