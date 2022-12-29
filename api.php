@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-// echo json_encode($_POST); die;
+
 
 $chk_sum = "";
 
@@ -61,9 +61,8 @@ if (count($_POST) > 0) {
         //     json_response($response);
         // } else {
         $passwordHash = md5($password.$appId.$passportId);
-        $user_id = $conn->lastInsertId();
-        $sql = "INSERT INTO security (user_id, firstname, lastname, nickname, phone, email, username, password, id_card, address)
-                VALUES ($user_id, '$firstname', '$lastname', '$nickname', '$phone', '$email', '$username', '$passwordHash', '$id_card', '$address')";
+        $sql = "INSERT INTO security (firstname, lastname, nickname, phone, email, username, password, id_card, address, time)
+                VALUES ('$firstname', '$lastname', '$nickname', '$phone', '$email', '$username', '$passwordHash', '$id_card', '$address', now())";
         $result = $conn->exec($sql);
     
         if ($result > 0) {

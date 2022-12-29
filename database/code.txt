@@ -1,0 +1,1 @@
+SELECT b.username, a.code, a.time FROM forget_password a LEFT JOIN security b ON a.username = b.username WHERE a.code = 234131;

@@ -25,14 +25,20 @@ if(isset($_POST['send'])) {
     // echo '<pre>';
     // print_r($data); die;
     $response = post($url, $data);
+    // var_dump($response); die;
     $res = json_decode($response, true);
     // var_dump($res); die;
 
     if ($res["code"] == 200) {
         $_SESSION['success'] = 'Success.';
-        $_SESSION['user_id'] = $res['user_id'];
+        $_SESSION['username'] = $res['result']['username'];
+        $_SESSION['firstname'] = $res['result']['firstname'];
+        $_SESSION['lastname'] = $res['result']['lastname'];
+        $_SESSION['nickname'] = $res['result']['nickname'];
         $_SESSION['is_login'] = 'yes';
+        // print_r($_SESSION); die();
         header('location: getform.php');
+        exit;
     } else {
         $_SESSION['error'] = 'Failed.';
         header('location: login.php');

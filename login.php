@@ -10,12 +10,22 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <style>
+        body {
+            background-color: #151f32;
+        }
+        .card {
+            background-color: #18366e;
+            color: #fff;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 <div class="card w-50 h-50 my-5 p-4 mx-auto">
         <div class="container">
             <div class="row">
-                <h1 class="mt-3 mb-2 text-success">Login</h1>
+                <h1 class="my-3 text-success">Login</h1>
                 <?php if (isset($_SESSION['error'])) { ?>
                     <div class="alert alert-danger" role="alert">
                         <?php
@@ -54,6 +64,11 @@
                         <img src="<?php echo CAPTCHA_URL . rand(); ?>" id='captchaimg'>
                         <a class="btn btn-warning" href="javascript: refreshCaptcha();"><i class="bi bi-arrow-clockwise"></i></a>
                         <span class="text-danger" id="msg_cap">&nbsp;</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between">
+                        <p><a href="form.php">Click</a> for register</p>
+                        <a class="btn btn-outline-warning" href="forget.php">Forget Password</a>
                     </div>
 
                     <input class="mt-3 btn btn-success form-control" type="submit" name="send" id="send" value="Send">

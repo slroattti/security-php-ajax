@@ -1,6 +1,6 @@
 <?php 
 require_once 'config.php';
-
+// var_dump($_POST); die;
 if (count($_POST) > 0) {
     $username = isset($_POST['username']) ? aes_decrypt($_POST['username'], $key) : '';
     $password = isset($_POST['password']) ? aes_decrypt($_POST['password'], $key) : '';
@@ -13,8 +13,10 @@ if (count($_POST) > 0) {
         json_response($response);
     }
     $passwordHash = md5($password.$appId.$passportId);
-    $sql = "SELECT username, password FROM security WHERE username = '" . $username . "' AND password = '". $passwordHash."'";
+    // var_dump($passwordHash); die;
+    $sql = "SELECT username, password, firstname, lastname, nickname FROM security WHERE username = '" . $username . "' AND password = '". $passwordHash."'";
     $result = db_all($conn, $sql);
+
 
     if(count($result) > 0 && $result[0]['username'] == $username && $result[0]['password'] == $passwordHash) {
         $response = [
@@ -26,7 +28,7 @@ if (count($_POST) > 0) {
     } else {
         $response = [
             'code' => 402,
-            'message' => "Failed Logged",
+            'message' => "Failed Logged" . $sql,
         ];
         json_response($response);
     }

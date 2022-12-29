@@ -36,18 +36,34 @@ if (isset($_POST['send'])) {
         $_SESSION['error'] = "Invalid email format";
         goto here;
     }
-    $petr1 = "/^[a-zA-Z-' ]*$/";
-    if (!preg_match($petr1, $firstname)) {
-        $_SESSION['error'] = "Only letters and white space allowed";
+    if (preg_match("/^[0-9\s]+$/", $firstname)) {
+        $log_filename = "C:/xampp/htdocs/security-php-ajax/logs";
+        $log_time = date('Y-m-d H:i:s');
+
+        $_SESSION['error'] = "Only firstname letters and white space allowed";
+        
+        wh_log('##################################', $log_filename);
+        wh_log("###### " . $log_time . " ###########", $log_filename);
+        $msg_start = " ******** " . $_SESSION['error'] . " ********";
+        $msg_end = " ******** " . preg_match($petr1, $firstname) . " ********";
+        wh_log($msg_start, $log_filename);
+        wh_log($msg_end, $log_filename);
         goto here;
     }
-    if (!preg_match($petr1, $lastname)) {
-        $_SESSION['error'] = "Only letters and white space allowed";
+    if (preg_match("/^[0-9\s]+$/", $lastname)) {
+        $_SESSION['error'] = "Only lastname letters and white space allowed";
         goto here;
     }
-    $petr2 = "/^([a-zA-Z0-9_-]+)$/";
-    if (!preg_match($petr2, $username)) {
-        $_SESSION['error'] = "Only letters and white space allowed";
+    if (!preg_match("/^([a-zA-Z0-9_-]+)$/", $username)) {
+        wh_log('##################################', $log_filename);
+        wh_log("###### " . $log_time . " ###########", $log_filename);
+
+        $_SESSION['error'] = "Only username letters and white space allowed";
+
+        $msg_start = " ******** " . $_SESSION['error'] . " ********";
+        $msg_end = " ******** " . !preg_match("/^([a-zA-Z0-9_-]+)$/", $username) . " ********";
+        wh_log($msg_start, $log_filename);
+        wh_log($msg_end, $log_filename);
         goto here;
     }
 

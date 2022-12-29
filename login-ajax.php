@@ -3,8 +3,10 @@ require_once 'config.php';
 
 if(isset($_POST['input_user'])) {
     $input_user = strtolower($_POST['input_user']);
-    $input_pass = strtolower(md5($_POST['input_pass']));
+    $input_pass = strtolower(md5($_POST['input_pass'].appId.passportId));
     $captcha_code = $_POST['captcha_code'];
+//     $appId = "2001";
+//    $passportId = "welcome'tomayworld";
 
     if(empty($_SESSION['captcha_code'] ) || strcasecmp($_SESSION['captcha_code'], $captcha_code) != 0){  
 		$arr_data = array("code"=>"108","msg"=> "invalid img code");
