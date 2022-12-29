@@ -100,7 +100,7 @@
                 return false;
             }
             var post_user = JSON.parse(chk_login(user, pass, captcha_code));
-            console.log(post_user.code);
+            // console.log(post_user.code);
             if(post_user.code != "200") {
                 $("#user").focus();
                 $("#msg_user").html('* '+post_user.msg);

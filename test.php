@@ -25,8 +25,8 @@
         //Recipients
         $mail->setFrom('aod03112544@gmail.com', 'Mailer');
         $mail->addAddress('aod03112544@gmail.com', 'Joe User');     //Add a recipient
-        $mail->addAddress('suttipong.vor@gmail.com');               //Name is optional
-        $mail->addReplyTo('suttipong.vor@gmail.com', 'Information');
+        $mail->addAddress('aod03112544@gmail.com');               //Name is optional
+        $mail->addReplyTo('aod03112544@gmail.com', 'Information');
         // $mail->addCC('cc@example.com');
         // $mail->addBCC('bcc@example.com');
     
@@ -36,7 +36,7 @@
 
         // $url = $_SERVER['HTTP_ORIGIN']."/security-php-ajax/forget.php?token=";
         // $params = array('username' => $username, 'code' => $code, 'chk_sum', md5($username.$appId.$passportId));
-        // $token = aes_decrypt(json_decode($params), $key)
+        // $token = aes_decrypt(json_decode($params), $key);
         //Content
         $mail->isHTML;                                  //Set email format to HTML
         $mail->Subject = 'Here is the subject';

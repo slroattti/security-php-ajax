@@ -3,7 +3,7 @@ require_once 'config.php';
 
 if(isset($_POST['input_user'])) {
     $input_user = strtolower($_POST['input_user']);
-    $input_pass = strtolower(md5($_POST['input_pass'].appId.passportId));
+    $input_pass = strtolower(md5($_POST['input_pass']));
     $captcha_code = $_POST['captcha_code'];
 //     $appId = "2001";
 //    $passportId = "welcome'tomayworld";

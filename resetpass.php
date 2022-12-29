@@ -48,14 +48,9 @@
                         unset($_SESSION['error']);
                     } 
                 ?>
-                <form id="form1" action="proforget.php" method="post">
+                <form id="form1" action="proforgot.php" method="post">
                     <div class="form-group">
-                        <label for="email">Email : </label>
-                        <input type="email" name="email" class="form-control" placeholder="Enter Email">
-                        <span class="text-danger" id="msg_email">&nbsp;</span>
-                    </div>
-                    <!-- <div class="form-group">
-                        <label for="Password" class="form-label">Password</label>
+                        <label for="Password" class="form-label">New Password</label>
                         <input type="password" name="password" class="form-control" id="pass" placeholder="Enter Password">
                         <span class="text-danger" id="msg_pass">&nbsp;</span>
                     </div>
@@ -63,16 +58,16 @@
                         <label for="comfirm password" class="form-label">Comfirm Password</label>
                         <input type="password" name="comfirm_password" class="form-control" id="c_pass" placeholder="Enter Comfirm Password">
                         <span class="text-danger" id="msg_cpass">&nbsp;</span>
-                    </div> -->
-                    <!-- <div class="form-group">
+                    </div>
+                    <div class="form-group">
                         <input class="w-50 border-1 border-gray-100 rounded outline-0" id="captcha_code" name="captcha_code" type="text" placeholder="code">
                         <img src="<?php echo CAPTCHA_URL . rand(); ?>" id='captchaimg'>
                         <a class="btn btn-warning" href="javascript: refreshCaptcha();"><i class="bi bi-arrow-clockwise"></i></a>
                         <span class="text-danger" id="msg_cap">&nbsp;</span>
-                    </div> -->
+                    </div>
                     <hr>
 
-                    <input class="mt-3 btn btn-warning form-control" type="submit" name="password-reset" id="send" value="Forget Password">
+                    <input class="mt-3 btn btn-warning form-control" type="submit" name="reset-password" id="send" value="Forget Password">
                 </form>
             </div>
         </div>

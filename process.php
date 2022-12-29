@@ -78,7 +78,7 @@ if (isset($_POST['send'])) {
 	}
     
     $url = API_URL . "/api.php";
-    // echo $url; die; 
+    // echo $url; die;
     $data = [
         'chk_sum' => md5($username . $appId . $passportId),
         'firstname' => aes_encrypt($firstname, $key),
