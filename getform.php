@@ -22,32 +22,47 @@ $response = curl_get($url);
     
     <div class="container">
         <div class="row">
-            <table class="table table-light mt-5">
-                <tr>
-                    <thead class="table-dark">
-                        <th scope="col">#</th>
-                        <th scope="col">Firstname</th>
-                        <th scope="col">Lastname</th>
-                        <th scope="col">Nickname</th>
-                        <th scope="col">Phone</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Address</th>
-                    </thead>
-                </tr>
-                <?php for($i = 0; $i < count($response['result']); $i++) : ?>  
+            <div class="d-flex justify-content-between px-3 mt-5">
+                <div class="font-monospace fs-4">
+                    Welcome, <?php echo 'The User'; ?>
+                </div>
+                <div class="">
+                    <a class="btn btn-danger form-label" href="logout.php">Logout</a>
+                </div>
+            </div>
+            <div class="card p-5">
+                <h2 class="text-secondary">Top 5 OF User.</h2>
+                <?php if(isset($response['result']) > 0) : ?>
+                <table class="table table-light mt-5">
                     <tr>
-                        <tbody>
-                            <td scope="row"><?php echo $i + 1 ?></td>
-                            <td scope="row"><?php echo $response['result'][$i]['firstname'] ?></td>
-                            <td scope="row"><?php echo $response['result'][$i]['lastname'] ?></td>
-                            <td scope="row"><?php echo $response['result'][$i]['nickname'] ?></td>
-                            <td scope="row"><?php echo $response['result'][$i]['phone'] ?></td>
-                            <td scope="row"><?php echo $response['result'][$i]['email'] ?></td>
-                            <td scope="row"><?php echo $response['result'][$i]['address'] ?></td>
-                        </tbody>
+                        <thead class="table-dark">
+                            <th scope="col">#</th>
+                            <th scope="col">Firstname</th>
+                            <th scope="col">Lastname</th>
+                            <th scope="col">Nickname</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Address</th>
+                        </thead>
                     </tr>
-                <?php endfor; ?>
-            </table>
+                    <?php for($i = 0; $i < count($response['result']); $i++) : ?>  
+                        <tr>
+                            <tbody>
+                                <td scope="row"><?php echo $i + 1 ?></td>
+                                <td scope="row"><?php echo $response['result'][$i]['firstname'] ?></td>
+                                <td scope="row"><?php echo $response['result'][$i]['lastname'] ?></td>
+                                <td scope="row"><?php echo $response['result'][$i]['nickname'] ?></td>
+                                <td scope="row"><?php echo $response['result'][$i]['phone'] ?></td>
+                                <td scope="row"><?php echo $response['result'][$i]['email'] ?></td>
+                                <td scope="row"><?php echo $response['result'][$i]['address'] ?></td>
+                            </tbody>
+                        </tr>
+                    <?php endfor; ?>
+                </table>
+                <?php else : ?>
+                    <p class="text-dark fs-3 text-center mt-5 font-monospace">404 Not Data User!</p>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
 

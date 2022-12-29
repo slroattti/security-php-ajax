@@ -2,8 +2,8 @@
 require_once 'config.php';
 
 if (count($_POST) > 0) {
-    $username = isset($_POST['username']) ? aes_decrypt($_POST['username']) : '';
-    $password = isset($_POST['password']) ? aes_decrypt($_POST['password']) : '';
+    $username = isset($_POST['username']) ? aes_decrypt($_POST['username'], $key) : '';
+    $password = isset($_POST['password']) ? aes_decrypt($_POST['password'], $key) : '';
 
     if(empty($username) || empty($password)) {
         $response = [

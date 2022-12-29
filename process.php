@@ -61,7 +61,8 @@ if (isset($_POST['send'])) {
         goto here;
 	}
     
-    $url = BASE_URL_LINK . "security/api.php";
+    $url = API_URL . "/api.php";
+    // echo $url; die; 
     $data = [
         'chk_sum' => md5($username . $appId . $passportId),
         'firstname' => aes_encrypt($firstname, $key),
@@ -75,11 +76,12 @@ if (isset($_POST['send'])) {
         'id_card' => aes_encrypt($id_card, $key),
         'address' => aes_encrypt($address, $key),
     ];
+    // echo '<pre>';
     // print_r($data); die;
     $response = post($url, $data);
     // print_r($response); die;
     $res = json_decode($response, true);
-    // print_r($res); die;  
+    // print_r($res); die;
 
     if ($res["code"] == 200) {
         $_SESSION['success'] = 'Success.';

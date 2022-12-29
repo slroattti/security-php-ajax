@@ -42,7 +42,4 @@ if(isset($_POST['input_user'])) {
         exit;
     }
 }
-
-
-
 ?>

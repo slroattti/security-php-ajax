@@ -16,7 +16,7 @@ if(isset($_POST['send'])) {
         goto here;
 	}
 
-    $url = BASE_URL_LINK . "security/login-api.php";
+    $url = API_URL . "/login-api.php";
     // echo $url; die;
     $data = [
         'username' => aes_encrypt($username, $key),
@@ -30,6 +30,8 @@ if(isset($_POST['send'])) {
 
     if ($res["code"] == 200) {
         $_SESSION['success'] = 'Success.';
+        $_SESSION['user_id'] = $res['user_id'];
+        $_SESSION['is_login'] = 'yes';
         header('location: getform.php');
     } else {
         $_SESSION['error'] = 'Failed.';

@@ -45,40 +45,41 @@ if (count($_POST) > 0) {
             ];
             json_response($response);
         }
-        $sql = "SELECT username, email, id_card
-            FROM security
-            WHERE username ='$username'
-            AND email = '$email'
-            AND id_card = '$id_card'
-            limit 1";
-            $result = db_all($conn, $sql);
-            // var_dump($result); die;
-        if (count($result) > 0) {
+        // $sql = "SELECT username, email, id_card
+        //     FROM security
+        //     WHERE username ='$username'
+        //     AND email = '$email'
+        //     AND id_card = '$id_card'
+        //     limit 1";
+        //     $result = db_all($conn, $sql);
+        //     // var_dump($result); die;
+        // if (count($result) > 0) {
+        //     $response = [
+        //         'code' => 402,
+        //         'message' => 'Invalid username or password exists',
+        //     ];
+        //     json_response($response);
+        // } else {
+        $passwordHash = md5($password.$appId.$passportId);
+        $user_id = $conn->lastInsertId();
+        $sql = "INSERT INTO security (user_id, firstname, lastname, nickname, phone, email, username, password, id_card, address)
+                VALUES ($user_id, '$firstname', '$lastname', '$nickname', '$phone', '$email', '$username', '$passwordHash', '$id_card', '$address')";
+        $result = $conn->exec($sql);
+    
+        if ($result > 0) {
             $response = [
-                'code' => 402,
-                'message' => 'Invalid username or password exists',
+                'code' => 200,
+                'message' => 'Success',
             ];
             json_response($response);
         } else {
-            $passwordHash = md5($password.$appId.$passportId);
-            $sql = "INSERT INTO security (firstname, lastname, nickname, phone, email, username, password, id_card, address)
-                    VALUES ('$firstname', '$lastname', '$nickname', '$phone', '$email', '$username', '$passwordHash', '$id_card', '$address')";
-            $result = $conn->exec($sql);
-        
-            if ($result > 0) {
-                $response = [
-                    'code' => 200,
-                    'message' => 'Success',
-                ];
-                json_response($response);
-            } else {
-                $response = [
-                    'code' => 405,
-                    'message' => 'Failed',
-                ];
-                json_response($response);
-            }
+            $response = [
+                'code' => 405,
+                'message' => 'Failed',
+            ];
+            json_response($response);
         }
+        // }
     } else {
         echo 'checksum validation failed';
         exit();

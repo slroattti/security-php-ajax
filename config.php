@@ -3,8 +3,9 @@
    require_once 'chk_sum.php';
    session_start();
 
-   define("BASE_URL", "http://localhost/security/");
-   define("BASE_URL_LINK", "https://bb03-180-183-250-244.ap.ngrok.io/");
+   define("BASE_URL", "http://localhost/security-php-ajax/");
+   define("API_URL", "https://b130-49-237-7-180.ap.ngrok.io/security-php-ajax");
+   define("CAPTCHA_URL", "https://b130-49-237-7-180.ap.ngrok.io/security-php-ajax/phptextcaptcha/phptextcaptcha/captcha.php?rand=");
    $key = "oattiz!";
    $appId = "2001";
    $passportId = "welcome'tomayworld";

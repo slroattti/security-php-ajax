@@ -51,7 +51,7 @@
                     </div>
                     <div class="form-group">
                         <input class="w-50 border-1 border-gray-100 rounded outline-0" id="captcha_code" name="captcha_code" type="text">
-                        <img src="https://bb03-180-183-250-244.ap.ngrok.io/security/phptextcaptcha/phptextcaptcha/captcha.php?rand=<?php echo rand(); ?>" id='captchaimg'>
+                        <img src="<?php echo CAPTCHA_URL . rand(); ?>" id='captchaimg'>
                         <a class="btn btn-warning" href="javascript: refreshCaptcha();"><i class="bi bi-arrow-clockwise"></i></a>
                         <span class="text-danger" id="msg_cap">&nbsp;</span>
                     </div>
