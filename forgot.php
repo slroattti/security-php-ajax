@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
     <style>
         body {
             background-color: #151f32;
@@ -61,7 +62,7 @@
                     </div>
                     <hr>
 
-                    <input class="mt-3 btn btn-warning form-control" type="submit" name="reset-password" id="send" value="Forget Password">
+                    <input class="mt-3 btn btn-warning form-control" type="button" id="send" value="Forget Password">
                 </form>
             </div>
         </div>
@@ -70,26 +71,38 @@
     <script type="text/javascript">
         $('#send').click(function() {
             var email = $('#email').val();
-
+            
             $('*[id*=msg_]').html('&nbsp;');
             if (email == "") {
                 $('#email').focus();
                 $('#msg_email').html('Please enter email');
                 return false;
             }
-        });
-        $(document).ready(function(){
 
-            // axios.post('test.php', {
-            //         email: email,
-            //     })
-            //     .then(function(response) {
-            //         console.log(response);
-            //     })
-            //     .catch(function(error) {
-            //         console.log(error);
-            //     });
+            var isEmail = JSON.parse(reset_pass(email));
+            // console.log(isEmail);
+            // return false;
+            if(isEmail.code != "200") {
+                $("#email").focus();
+                $("#msg_email").html('* '+isEmail.msg);
+                return false;
+            }
+            $('#form1').submit();
         });
+        function reset_pass(email) {
+            var result;
+            result = $.ajax({
+                type: "POST",
+                url: "forgotajax.php",
+                dataType: "json",
+                data: "email="+email,
+                cache: false,
+                async: false,
+            });
+            // console.log(result.responseText);
+            // return false;
+            return result.responseText;
+        }
     </script>
 </body>
 

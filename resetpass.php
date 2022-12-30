@@ -1,4 +1,16 @@
-<?php require_once 'config.php'; ?>
+<?php require_once 'config.php';
+  $url= API_URL . "/chk_token.php?token=".$_GET['token']."";
+//   echo $url; die;
+
+  $response = curl_get($url);
+  print_r($response); die;
+  if($response['code'] != 200) {
+    echo '<script>
+        alert("Token is time out");
+        window.location.href = forgot.php;
+    </script>';
+  } 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,8 +60,9 @@
                         unset($_SESSION['error']);
                     } 
                 ?>
-                <form id="form1" action="proforgot.php" method="post">
+                <form id="form1" action="proupdate.php" method="post">
                     <div class="form-group">
+                        <input type="hidden" name="token" value="<?php echo $_GET['token']; ?>"> 
                         <label for="Password" class="form-label">New Password</label>
                         <input type="password" name="password" class="form-control" id="pass" placeholder="Enter Password">
                         <span class="text-danger" id="msg_pass">&nbsp;</span>
@@ -58,12 +71,6 @@
                         <label for="comfirm password" class="form-label">Comfirm Password</label>
                         <input type="password" name="comfirm_password" class="form-control" id="c_pass" placeholder="Enter Comfirm Password">
                         <span class="text-danger" id="msg_cpass">&nbsp;</span>
-                    </div>
-                    <div class="form-group">
-                        <input class="w-50 border-1 border-gray-100 rounded outline-0" id="captcha_code" name="captcha_code" type="text" placeholder="code">
-                        <img src="<?php echo CAPTCHA_URL . rand(); ?>" id='captchaimg'>
-                        <a class="btn btn-warning" href="javascript: refreshCaptcha();"><i class="bi bi-arrow-clockwise"></i></a>
-                        <span class="text-danger" id="msg_cap">&nbsp;</span>
                     </div>
                     <hr>
 

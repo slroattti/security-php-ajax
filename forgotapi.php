@@ -1,26 +1,44 @@
 <?php
 require_once 'config.php';
+require_once 'test.php';
 
 if (count($_POST) > 0) {
     $email = isset($_POST['email']) ? aes_decrypt($_POST['email'], $key) : "";
-
-    $sql = "SELECT * FROM security WHERE email = '$email'";
+    // echo $email; die;
+    $sql = "SELECT * FROM security WHERE email = '$email' limit 1";
     $result = db_all($conn, $sql);
+    // var_dump($result); die;
     if(count($result) > 0) {
-        $token = md5($email.$appId.$passportId);
-        $link = "<a href='". API_URL . "'/resetpass.php?key='" . $email. "'&token='" . $token . "'>Click to Reset Password</a>'";
-
-        $response = [
-            'code' => 200,
-            'message' => 'Success',
-            'token' => $token,
-            'link' => $link
-        ];
-        json_response($response);
+        $username = $result[0]['username'];
+        // var_dump($username); die;
+        $rand = rand(10, 100);
+        $token = md5($email.$rand);
+        // echo $token; die;
+        $link = "<a href='". API_URL . "/resetpass.php?token=" . $token . ">Click to Reset Password</a>'";
+        // echo $link; die;
+        $insdata = "INSERT INTO forgot_password (username, code, time) VALUES ('$username', '$token', now())";
+        $resultind = $conn->exec($insdata);
+        // print_r($resultind); die;
+        $mail = getMail($username, $link);
+        if ($resultind) {
+            $response = [
+                'code' => 200,
+                'message' => 'Success',
+                'token' => $username,
+                'link' => $link,
+            ];
+            json_response($response);
+        } else {
+            $response = [
+                'code' => 500,
+                'message' => 'Failed',
+            ];
+            json_response($response);
+        }
     } else {
         $response = [
             'code' => 400,
-            'message' => 'Failed',
+            'message' => 'Not has been user in database!',
         ];
         json_response($response);
     }

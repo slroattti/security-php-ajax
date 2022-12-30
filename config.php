@@ -15,8 +15,8 @@
    }
 
    define("BASE_URL", "http://localhost/security-php-ajax/");
-   define("API_URL", "https://ccc0-49-237-5-237.ap.ngrok.io/security-php-ajax");
-   define("CAPTCHA_URL", "https://ccc0-49-237-5-237.ap.ngrok.io/security-php-ajax/phptextcaptcha/phptextcaptcha/captcha.php?rand=");
+   define("API_URL", "https://fc1b-180-183-250-244.ap.ngrok.io/security-php-ajax");
+   define("CAPTCHA_URL", "https://fc1b-180-183-250-244.ap.ngrok.io/security-php-ajax/phptextcaptcha/phptextcaptcha/captcha.php?rand=");
    $key = "oattiz!";
    $appId = "2001";
    $passportId = "welcome'tomayworld";

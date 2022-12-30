@@ -1,19 +1,20 @@
 <?php
-    //Import PHPMailer classes into the global namespace
-    //These must be at the top of your script, not inside a function
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\SMTP;
-    use PHPMailer\PHPMailer\Exception;
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+    
+function getMail($username, $link) {
     
     //Load Composer's autoloader
     require 'download/vendor/autoload.php';
     
     //Create an instance; passing `true` enables exceptions
     $mail = new PHPMailer(true);
-    
     try {
         //Server settings
-        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+        // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
         $mail->isSMTP();                                            //Send using SMTP
         $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
@@ -37,15 +38,17 @@
         // $url = $_SERVER['HTTP_ORIGIN']."/security-php-ajax/forget.php?token=";
         // $params = array('username' => $username, 'code' => $code, 'chk_sum', md5($username.$appId.$passportId));
         // $token = aes_decrypt(json_decode($params), $key);
+        $msg = $username . ' <br> ' . $link;
         //Content
-        $mail->isHTML;                                  //Set email format to HTML
+        $mail->isHTML(true);                                  //Set email format to HTML
         $mail->Subject = 'Here is the subject';
-        $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+        $mail->Body    =  $msg;
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
     
         $mail->send();
-        echo 'Message has been sent';
+        // echo 'Message has been sent';
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
+}
 ?>
