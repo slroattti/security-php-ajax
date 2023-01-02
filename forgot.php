@@ -55,6 +55,7 @@
                 }
                 ?>
                 <form id="form1" action="proforgot.php" method="post">
+                    <p class="d-none" id="loading">LOADING....</p>
                     <div class="form-group">
                         <label for="email">Email : </label>
                         <input type="email" id="email" name="email" class="form-control" placeholder="Enter Email">
@@ -70,6 +71,7 @@
 
     <script type="text/javascript">
         $('#send').click(function() {
+            $('#loading').fadeOut('slow');
             var email = $('#email').val();
             
             $('*[id*=msg_]').html('&nbsp;');
@@ -87,6 +89,7 @@
                 $("#msg_email").html('* '+isEmail.msg);
                 return false;
             }
+            
             $('#form1').submit();
         });
         function reset_pass(email) {

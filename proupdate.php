@@ -1,11 +1,12 @@
 <?php 
 require_once 'config.php';
 
-if(isset($_POST['reset-password'])) {
+if(count($_POST) > 0) {
+    $token = $_POST['token'];
     $password = isset($_POST['password']) ? $_POST['password'] : "";
     $c_password = isset($_POST['comfirm_password']) ? $_POST['comfirm_password'] : "";
 
-    if($password == "" || $c_password == ""){
+    if($token == "" || $password == "" || $c_password == ""){
         $_SESSION['error'] = "password and confirm password is empty.";
         goto here;
     }
@@ -18,19 +19,22 @@ if(isset($_POST['reset-password'])) {
     
     $url = API_URL . "/apiupdate.php";
     $data = [
-        'password' => $password,
-        'c_password' => $c_password,
+        'token' => $token,
+        'password' => aes_encrypt($password, $key),
+        'comfirm_password' => aes_encrypt($c_password, $key),
     ];
+    // print_r($data); die;
     $response = post($url, $data);
+    // print_r($response); die;
     $res = json_decode($response, true);
-    print_r($res); die;
+    // print_r($res); die;
 
     if ($res["code"] == 200) {
-        $_SESSION['success'] = 'Delete success.';
-        header('location: from.php');
+        $_SESSION['success'] = $res['message'];
+        header('location: getform.php');
         exit;
     } else {
-        $_SESSION['error'] = 'Delete Failed.';
+        $_SESSION['error'] = $res['message'];
         header('location: forgot.php');
     }
 

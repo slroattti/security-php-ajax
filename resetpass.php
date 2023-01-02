@@ -1,19 +1,20 @@
 <?php require_once 'config.php';
-  $url= API_URL . "/chk_token.php?token=".$_GET['token']."";
+$url = API_URL . "/tokenapi.php?token=" . $_GET['token'] . "";
 //   echo $url; die;
 
-  $response = curl_get($url);
-  print_r($response); die;
-  if($response['code'] != 200) {
+$response = curl_get($url);
+//   print_r($response); die;
+if ($response['code'] != 200) {
     echo '<script>
         alert("Token is time out");
-        window.location.href = forgot.php;
+        window.location.href="forgot.php";
     </script>';
-  } 
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,6 +27,7 @@
         body {
             background-color: #151f32;
         }
+
         .card {
             background-color: #18366e;
             color: #fff;
@@ -33,8 +35,9 @@
         }
     </style>
 </head>
+
 <body>
-<div class="card w-50 h-50 my-5 p-4 mx-auto">
+    <div class="card w-50 h-50 my-5 p-4 mx-auto">
         <div class="container">
             <div class="row">
                 <h1 class="my-3 text-warning">Forgot Password</h1>
@@ -53,16 +56,17 @@
                         unset($_SESSION['success']);
                         ?>
                     </div>
-                <?php } if(isset($_SESSION['success'])) {
-                        unset($_SESSION['success']);
-                    } 
-                    if(isset($_SESSION['error'])) {
-                        unset($_SESSION['error']);
-                    } 
+                <?php }
+                if (isset($_SESSION['success'])) {
+                    unset($_SESSION['success']);
+                }
+                if (isset($_SESSION['error'])) {
+                    unset($_SESSION['error']);
+                }
                 ?>
                 <form id="form1" action="proupdate.php" method="post">
                     <div class="form-group">
-                        <input type="hidden" name="token" value="<?php echo $_GET['token']; ?>"> 
+                        <input type="hidden" name="token" value="<?php echo $_GET['token']; ?>">
                         <label for="Password" class="form-label">New Password</label>
                         <input type="password" name="password" class="form-control" id="pass" placeholder="Enter Password">
                         <span class="text-danger" id="msg_pass">&nbsp;</span>
@@ -80,4 +84,5 @@
         </div>
     </div>
 </body>
+
 </html>

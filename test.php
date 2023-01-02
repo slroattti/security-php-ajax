@@ -38,11 +38,11 @@ function getMail($username, $link) {
         // $url = $_SERVER['HTTP_ORIGIN']."/security-php-ajax/forget.php?token=";
         // $params = array('username' => $username, 'code' => $code, 'chk_sum', md5($username.$appId.$passportId));
         // $token = aes_decrypt(json_decode($params), $key);
-        $msg = $username . ' <br> ' . $link;
+        $msg = 'The username account' .$username . ' <br> ' . 'If you need reset password ' .  $link;
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = 'Here is the subject';
-        $mail->Body    =  $msg;
+        $mail->Subject = 'Code new password for your account';
+        $mail->Body    = $msg;
         $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
     
         $mail->send();

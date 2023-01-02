@@ -68,7 +68,7 @@
                     <hr>
                     <div class="d-flex justify-content-between">
                         <p><a href="form.php">Click</a> for register</p>
-                        <a class="btn btn-outline-warning" href="forget.php">Forget Password</a>
+                        <a class="btn btn-outline-warning" href="forgot.php">Forget Password</a>
                     </div>
 
                     <input class="mt-3 btn btn-success form-control" type="submit" name="send" id="send" value="Send">

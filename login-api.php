@@ -14,7 +14,7 @@ if (count($_POST) > 0) {
     }
     $passwordHash = md5($password.$appId.$passportId);
     // var_dump($passwordHash); die;
-    $sql = "SELECT username, password, firstname, lastname, nickname FROM security WHERE username = '" . $username . "' AND password = '". $passwordHash."'";
+    $sql = "SELECT username, password, firstname, lastname, nickname FROM security WHERE username = '$username' AND password = '$passwordHash'";
     $result = db_all($conn, $sql);
 
 

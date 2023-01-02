@@ -24,10 +24,11 @@ if (count($_POST) > 0) {
             $response = [
                 'code' => 200,
                 'message' => 'Success',
-                'token' => $username,
+                'token' => $token,
                 'link' => $link,
             ];
             json_response($response);
+            // print_r($response);
         } else {
             $response = [
                 'code' => 500,

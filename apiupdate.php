@@ -2,9 +2,9 @@
 require_once 'config.php';
 
 if(count($_POST) > 0)
-$token = isset($_POST['code']) ? $_POST['code'] : "";
-$password = isset($_POST['password']) ? $_POST['password'] : "";
-$c_password = isset($_POST['comfirm_password']) ? $_POST['comfirm_password'] : "";
+$token = isset($_POST['token']) ? $_POST['token'] : "";
+$password = isset($_POST['password']) ? aes_decrypt($_POST['password'], $key) : "";
+$c_password = isset($_POST['comfirm_password']) ? aes_decrypt($_POST['comfirm_password'], $key) : "";
 
 if ($token == "" || $password == "" || $c_password == "" ) {
     $response = [
@@ -17,6 +17,7 @@ if ($token == "" || $password == "" || $c_password == "" ) {
 if($password == $c_password) {
     $sql = "SELECT a.username, a.code FROM forgot_password a  LEFT JOIN security b ON a.username = b.username WHERE a.code = '$token'";
     $result = db_all($conn, $sql);
+    // print_r($result);
     if (count($result) > 0) {
         $username = $result[0]['username'];
         $spassword = md5($password.$appId.$passportId);
@@ -26,13 +27,13 @@ if($password == $c_password) {
         $conn->exec($sqld);
         $response = [
             'code' => 200,
-            'message' => "Success delete.",
+            'message' => "Success updated!",
         ];
         json_response($response);
     } else {
         $response = [
             'code' => 402,
-            'message' => "Failed delete.",
+            'message' => "Update failed, try again.",
 
         ];
         json_response($response);

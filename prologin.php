@@ -27,7 +27,7 @@ if(isset($_POST['send'])) {
     $response = post($url, $data);
     // var_dump($response); die;
     $res = json_decode($response, true);
-    // var_dump($res); die;
+    // print_r($res); die;
 
     if ($res["code"] == 200) {
         $_SESSION['success'] = 'Success.';
